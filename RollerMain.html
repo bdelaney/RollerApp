@@ -83,31 +83,31 @@
       //global variables
       var hTotal = 0,
           rTotal = 0,
-          allRolls=[],
-          ex6new=false;
+          allRolls=[];
 
 // $('#slider-0').bind( "keypress", function(e){    //nothing seemed to work to add events to the slider
-  $(document).keypress(function(e) { 
+  $(document).keypress(function(e) {
    if(e.which == 13  ) {rollDice()};
  })
 
-      $('#clearButton').click(function(){
-      $('input').val('');
-      // $('input').textinput('disable');
-      $('#slider-0').val( $('#slider-0').attr('min') ).slider('enable');
-      $('select').val('off').slider('refresh');
-      hTotal = 0;
-      rTotal = 0;
-      allRolls.length=0;
-      })
-    // $('#rollButton').button('disable').refresh; //have not been able to get this button to disable
-    // $('#content').trigger('create').refresh;  //supposed to work to recreate a section which would reset all controls
+      $('#clearButton').click(function () {
+          clear();
+          $('select').val('off').slider('refresh');
+     })
+
+      function clear() {
+          $('input').val('');
+          $('#slider-0').val($('#slider-0').attr('min')).slider('enable');
+          hTotal = 0;
+          rTotal = 0;
+          allRolls.length = 0;
+      }
+
       $('#rollButton').click(function(){
           rollDice();
         })
 
         function rollDice(){
-          if (ex6new==true) {allRolls.length=0} {ex6new=false};
           rTotal++;
           var inDice=$('#slider-0').val(),
               i=0,
@@ -137,12 +137,17 @@
           if ($('#flip6').val()=='on' && sixes>0 ) {$('#slider-0').val(sixes).slider('disable')};   //6
           if ($('#flip6').val()=='on' && sixes==0 ) {$('#slider-0').val(0).slider('disable')};
         }
-         
+
           $('#flip6').bind( "change", function () {
-              if($('#flip6').val()=='on') {ex6new=true} else {ex6new=false};
+              if($('#flip6').val()=='on')
+              $('#flipX').val('off').slider('refresh');
+              clear();
           })
 
-      // $('#rollButton').buttonMarkup({ theme: "e" });
-        // $('#slider-0').buttonMarkup({ theme: "e" });
-        // $('#slider-0').buttonMarkup({ theme: "e" }).slider('disable').slider('refresh');
+          $('#flipX').bind( "change", function () {
+              if($('#flipX').val()=='on')
+                  $('#flip6').val('off').slider('refresh');
+              clear();
+          })
+
 </script>
