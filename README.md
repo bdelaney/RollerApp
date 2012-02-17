@@ -40,4 +40,3 @@
           if ($('#flip6').val()=='on' && sixes>0 ) {$('#slider-0').val(sixes).slider('disable')};   //6
           if ($('#flip6').val()=='on' && sixes==0 ) {$('#slider-0').val(0).slider('disable')};
         }
-        ```
